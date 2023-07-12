@@ -2,7 +2,10 @@
     <LayoutFixed/>
     <LayoutNav/>
     <LayoutHeader/>
-    <Router-view></Router-view>
+    <!-- 以当前路由完整路径为key的值，给router-view组件绑定 -->
+    <!-- key可以用于强制替换一个元素/组件而不是复用它 -->
+    <!-- <Router-view :key="$route.fullPath"/> -->
+    <RouterView/>
     <LayoutFooter/>
 </template>
 

@@ -1,5 +1,5 @@
 <script setup>
-import LayoutHeaderUl from './LayoutHeaderUl.vue'
+import LayoutHeaderUI from './LayoutHeaderUI.vue'
 // import HeaderCart from './HeaderCart.vue'
 
 
@@ -12,7 +12,7 @@ import LayoutHeaderUl from './LayoutHeaderUl.vue'
         <RouterLink to="/">小兔鲜</RouterLink>
       </h1>
 
-      <LayoutHeaderUl />
+      <LayoutHeaderUI />
       <div class="search">
         <i class="iconfont icon-search"></i>
         <input type="text" placeholder="搜一搜">
