@@ -5,6 +5,9 @@ const Login = () => import('@/views/Login/index.vue')
 const Layout = () => import('@/views/Layout/index.vue')
 const Home = () => import('@/views/Home/index.vue')
 const Category = () => import('@/views/Category/index.vue')
+const SubCategory = () => import('@/views/SubCategory/index.vue')
+const Detail = () => import('@/views/Detail/index.vue')
+
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
@@ -21,6 +24,14 @@ const router = createRouter({
         {
           path: 'category/:id',
           component: Category
+        },
+        {
+          path: 'category/sub/:id',
+          component: SubCategory
+        },
+        {
+          path: 'detail/:id',
+          component: Detail
         }
       ]
     },
@@ -28,7 +39,13 @@ const router = createRouter({
       path: '/login',
       component: Login
     }
-  ]
+  ],
+  //路由滚动行为定制
+  scrollBehavior() {
+    return {
+      top: 0
+    }
+  }
 })
 
 export default router
