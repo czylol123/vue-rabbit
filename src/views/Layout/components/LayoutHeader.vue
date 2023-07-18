@@ -1,7 +1,6 @@
 <script setup>
 import LayoutHeaderUI from './LayoutHeaderUI.vue'
-// import HeaderCart from './HeaderCart.vue'
-
+import HeaderCart from './HeaderCart.vue'
 
 </script>
 
@@ -13,14 +12,15 @@ import LayoutHeaderUI from './LayoutHeaderUI.vue'
       </h1>
 
       <LayoutHeaderUI />
+
       <div class="search">
         <i class="iconfont icon-search"></i>
         <input type="text" placeholder="搜一搜">
       </div>
       <!-- 头部购物车 -->
-      <!-- <HeaderCart /> -->
+      <HeaderCart />
     </div>
-</header>
+  </header>
 </template>
 
 
@@ -95,4 +95,4 @@ import LayoutHeaderUI from './LayoutHeaderUI.vue'
     }
   }
 }
-</style>
+</style>@/stores/userStore

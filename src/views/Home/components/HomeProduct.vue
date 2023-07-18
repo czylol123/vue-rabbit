@@ -3,7 +3,7 @@
         <HomePanel v-for="cate in goodsProduct" :title="cate.name" :key="cate.id">
             <template #main>
                 <div class="box">
-                    <RouterLink class="cover" to="/">
+                    <RouterLink class="cover" :to="`/category/${cate.id}`">
                         <img v-img-lazy="cate.picture" alt=""/>
                         <strong class="label">
                             <span>{{ cate.name }}馆</span>

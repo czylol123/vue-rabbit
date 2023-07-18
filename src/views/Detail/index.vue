@@ -72,11 +72,11 @@
                             <!-- sku组件 -->
                             <XtxSku :goods="goods" @change="skuChange"/>
                             <!-- 数据组件 -->
-
+                            <el-input-number v-model="count" :min="1" @change="handleChange" />
                             <!-- 按钮组件 -->
 
                             <div>
-                                <el-button size="large" class="btn">
+                                <el-button size="large" class="btn" @click="addCarts">
                                     加入购物车
                                 </el-button>
                             </div>
@@ -119,11 +119,40 @@
 <script setup>
 import { useDetail } from './composables/useDetail'
 import DetailHot from './component/DetailHot.vue';
+import { ref } from 'vue'
+import { useCartStore } from '@/stores/cartStore'
+import { ElMessage } from 'element-plus';
+const addCartStore = useCartStore()
 
 const { goods } = useDetail()
+const count = ref(1)
+let skuObj = {}
 
+const handleChange = (value) => {
+  count.value = value
+}
 const skuChange = (sku) => {
-  console.log(sku);
+  skuObj = sku
+}
+
+const addCarts = () => {
+  // 判断是否选择了规格
+  if(skuObj.skuId) {
+    // 规格选择 触发action
+    addCartStore.addCart({
+      id: goods.value.id,
+      name: goods.value.name,
+      picture: goods.value.mainPictures[0],
+      count: count.value,
+      skuId: skuObj.skuId,
+      price: skuObj.price,
+      attrsText: skuObj.specsText,
+      selected: true
+    })
+  } else {
+    // 没有选择 提示用户
+    ElMessage.warning('请选择规格')
+  }
 }
 
 </script>
@@ -366,4 +395,4 @@ const skuChange = (sku) => {
 .bread-container {
   padding: 25px 0;
 }
-</style>
+</style>@/stores/cartStore

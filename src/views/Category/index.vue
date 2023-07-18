@@ -30,7 +30,7 @@
             </div>
             <!-- 分类商品 -->
             <div class="ref-goods" v-for="item in categoryData.children" :key="item.id">
-                <div class="head">
+                <div class="head" :id="item.id" ref="anchor">
                     <h3>- {{ item.name }} -</h3>
                 </div>
                 <div class="body">
@@ -42,6 +42,7 @@
 </template>
 
 <script setup>
+import { onUpdated, ref } from 'vue';
 import GoodsItem from '../Home/components/GoodsItem.vue'
 import { useBanner } from './composables/useBanner'
 import { useCategory } from './composables/useCategory'
@@ -49,6 +50,28 @@ import { useCategory } from './composables/useCategory'
 const { bannerList } = useBanner()
 const { categoryData } = useCategory()
 
+const anchor = ref(null)
+
+onUpdated(() => {
+  const anchorId = window.location.hash.substring(1)
+  if(anchorId) {
+    // 通过dom元素操作
+    // const element = document.getElementById(anchorId)
+    // console.log(element);
+    // if(element) {
+    //   element.scrollIntoView()
+    // }
+    // 通过ref操作
+    const componentInstance = anchor.value
+    componentInstance.forEach(item => {
+      const id = item.getAttribute('id')
+      // console.log(item);
+      if(id === anchorId) {
+        item.scrollIntoView()
+      }
+    })
+  }
+})
 </script>
 
 <style scoped lang="scss">
