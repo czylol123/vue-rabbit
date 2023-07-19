@@ -104,6 +104,7 @@ export const useCartStore = defineStore('addCart',
 
         return {
             cartList,
+            isLogin,
             addCart,
             delCart,
             allCount,

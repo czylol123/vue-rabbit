@@ -8,6 +8,9 @@ const Category = () => import('@/views/Category/index.vue')
 const SubCategory = () => import('@/views/SubCategory/index.vue')
 const Detail = () => import('@/views/Detail/index.vue')
 const CartList = () => import('@/views/CartList/index.vue')
+const Checkout = () => import('@/views/Checkout/index.vue')
+const Pay = () => import('@/views/Pay/index.vue')
+const PayCallback = () => import('@/views/PayCallback/index.vue')
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
@@ -36,6 +39,18 @@ const router = createRouter({
         {
           path: 'cartlist',
           component: CartList
+        },
+        {
+          path: 'checkout',
+          component: Checkout
+        },
+        {
+          path: 'pay',
+          component: Pay
+        },
+        {
+          path: 'paycallback',
+          component: PayCallback
         }
       ]
     },

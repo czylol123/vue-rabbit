@@ -6,7 +6,7 @@
                     <thead>
                         <tr>
                             <th width="120">
-                                <el-checkbox :model-value="cartStore.isAll" @change="allCheck"/>
+                                <el-checkbox :model-value="cartStore.isAll" @change="allCheck" v-if="cartStore.cartList.length !== 0"/>
                             </th>
                             <th width="400">商品信息</th>
                             <th width="220">单价</th>
@@ -35,7 +35,7 @@
                 <p>&yen;{{ i.price }}</p>
               </td>
               <td class="tc">
-                <el-input-number v-model="i.count" />
+                <el-input-number v-model="i.count" @change="handleChange"/>
               </td>
               <td class="tc">
                 <p class="f16 red">&yen;{{ (i.price * i.count).toFixed(2) }}</p>
@@ -71,7 +71,7 @@
         </div>
         <div class="total">
           <el-button size="large" @click="cartStore.emptyCart">清空购物车</el-button>
-          <el-button size="large" type="primary" >下单结算</el-button>
+          <el-button size="large" type="primary" @click="isLoginCheckout">下单结算</el-button>
         </div>
       </div>
     </div>
@@ -80,6 +80,7 @@
 
 <script setup>
 import { useCartStore } from '@/stores/cartStore'
+import { ElMessage } from 'element-plus';
 import { useRouter } from 'vue-router'
 const router = useRouter()
 const cartStore = useCartStore()
@@ -88,13 +89,28 @@ const gotoIndex = () => {
         path: '/'
     })
 }
-
+// 单选框
 const singleCheck = (i, selected) => {
     cartStore.singleCheck(i.skuId, selected)
 }
-
+// 多选框
 const allCheck = (selected) => {
     cartStore.allCheck(selected)
+}
+// 判断是否登录
+const isLoginCheckout = () => {
+  if(cartStore.isLogin) {
+    router.push('/checkout')
+  } else {
+    ElMessage.warning('请先登录')
+    setTimeout(() => {
+      router.push('/login')
+    }, 1000)
+  }
+}
+
+const handleChange = (value) => {
+  
 }
 </script>
 
